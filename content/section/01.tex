@@ -1,0 +1,170 @@
+\section{Tên đề tài}
+\textbf{Phân tích động lực thị trường và giá/thanh lý của ETH, meme coin (DOGE) trong giai đoạn tháng 9/2024 - cuối năm 2024}
+
+\section{Danh sách thành viên}
+Được ghi ở trang bìa.
+
+\section{Mô tả dữ liệu}
+Dữ liệu được thu thập từ sàn giao dịch lớn là và Binance \cite{binancevision_futures_data}, tập trung vào đồng Ethereum (ETH) trong các tháng cuối năm 2024. Dữ liệu bao gồm ba nhóm chính, được mô tả chi tiết dưới đây.
+
+Dữ liệu được lấy từ các sàn giao dịch phái sinh (Futures) của Binance, thị trường hợp đồng vĩnh cửu ETHUSDT, các meme coin khác. 
+
+
+\subsection{Dữ liệu nến giá \cite{binance_klines}}
+Dữ liệu này chứa thông tin về giá mở, cao, thấp, đóng và khối lượng giao dịch trong từng khung thời gian (OHLCV).
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.25}
+\centering
+\begin{tabular}{|l|l|p{8cm}|}
+\hline
+\textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Mô tả chi tiết} \\ \hline
+open\_time & Long & Thời gian mở nến (thời gian Unix). \\ \hline
+open & Float & Giá mở cửa. \\ \hline
+high & Float & Giá cao nhất trong phiên. \\ \hline
+low & Float & Giá thấp nhất trong phiên. \\ \hline
+close & Float & Giá đóng cửa. \\ \hline
+volume & Float & Khối lượng giao dịch (tổng lượng coin). \\ \hline
+close\_time & Long & Thời gian đóng nến (thời gian Unix). \\ \hline
+quote\_volume & Float & Khối lượng giao dịch tính theo tài sản định giá (USDT). \\ \hline
+count & Integer & Số lượng lượt khớp lệnh trong nến. \\ \hline
+taker\_buy\_volume & Float & Khối lượng mua chủ động của Taker. \\ \hline
+taker\_buy\_quote\_volume & Float & Giá trị mua chủ động của Taker tính theo USDT. \\ \hline
+\end{tabular}
+\caption{Mô tả các trường dữ liệu Binance Kline (OHLCV)}
+\end{table}
+
+
+\subsection{Dữ liệu lệnh thanh lý \cite{binance_liquidation}}
+Dữ liệu này chứa thông tin chi tiết về từng lệnh thanh lý được kích hoạt.
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.25}
+\centering
+\begin{tabular}{|l|l|p{8cm}|}
+\hline
+\textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Mô tả chi tiết} \\ \hline
+time & Long & Thời gian khớp lệnh  \\ \hline
+side & String & Chiều của lệnh thanh lý (SELL - Thanh lý lệnh Long, BUY - Thanh lý lệnh Short). \\ \hline
+order\_type & String & Loại lệnh (thường là LIMIT). \\ \hline
+time\_in\_force & String & Thời gian hiệu lực của lệnh (ví dụ: IOC - Immediate or Cancel). \\ \hline
+original\_quantity & Float & Khối lượng gốc của lệnh thanh lý. \\ \hline
+price & Float & Giá đặt của lệnh thanh lý (thường là giá phá sản). \\ \hline
+average\_price & Float & Giá khớp trung bình thực tế. \\ \hline
+order\_status & String & Trạng thái lệnh (ví dụ: FILLED - Đã khớp hoàn toàn). \\ \hline
+last\_fill\_quantity & Float & Khối lượng khớp ở lần gần nhất. \\ \hline
+accumulated\_fill\_quantity & Float & Tổng khối lượng đã khớp của lệnh này. \\ \hline
+\end{tabular}
+\caption{Mô tả các trường dữ liệu lệnh thanh lý}
+\end{table}
+
+
+
+% \subsection{Dữ liệu Giao dịch Khớp lệnh (Bybit Public Trading Data) \cite{bybit_trade}}
+% Dữ liệu này chứa thông tin chi tiết về từng lệnh đã khớp trên thị trường.
+
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.5\textwidth]{img/trade.png}
+% \caption{Biểu đồ giao dịch khớp lệnh: giá, lượng ETH}
+% \end{figure}
+
+% \begin{table}[H]
+% \renewcommand{\arraystretch}{1.25}
+% \centering
+% \begin{tabular}{|l|l|p{8cm}|}
+% \hline
+% \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Mô tả chi tiết} \\ \hline
+% timestamp & Float & Thời điểm diễn ra giao dịch (thời gian Unix). \\ \hline
+% symbol & String & Cặp giao dịch (ví dụ: ETHUSDT). \\ \hline
+% side & String & Chiều của lệnh khởi tạo (Buy - mua chủ động hoặc Sell - bán chủ động). \\ \hline
+% size & Float & Khối lượng tài sản cơ sở được giao dịch (ETH). \\ \hline
+% price & Float & Mức giá khớp lệnh (USDT). \\ \hline
+% tickDirection & String & Hướng biến động giá so với tick trước đó (PlusTick: tăng, MinusTick: giảm, ZeroPlusTick/ZeroMinusTick: không đổi). \\ \hline
+% trdMatchID & String & Mã định danh duy nhất của lượt khớp lệnh. \\ \hline
+% grossValue & Float & Giá trị danh nghĩa thô của giao dịch (thường dùng để tính volume danh nghĩa). \\ \hline
+% homeNotional & Float & Giá trị tính theo đồng tiền cơ sở (Base Currency - ETH). \\ \hline
+% foreignNotional & Float & Giá trị tính theo đồng tiền định giá (Quote Currency - USDT). Tương đương $price \times size$. \\ \hline
+% RPI & Integer & Retail Price Index (Chỉ số bán lẻ) hoặc cờ đánh dấu loại giao dịch đặc biệt (nếu có). \\ \hline
+% \end{tabular}
+% \caption{Mô tả các trường dữ liệu Bybit Public Trade}
+% \end{table}
+
+% \subsection{Dữ liệu Sổ lệnh (Bybit Orderbook) \cite{bybit_orderbook}}
+% Dữ liệu snapshot về độ sâu thị trường với 10 mức giá tốt nhất (L10).
+
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.35\textwidth, height=0.6\textheight]{img/orderbook.png}
+% \caption{Biểu đồ cột ngang - Orderbook}
+% \end{figure}
+
+% \begin{table}[H]
+% \renewcommand{\arraystretch}{1.25}
+% \centering
+% \begin{tabular}{|l|l|p{8cm}|}
+% \hline
+% \textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Mô tả chi tiết} \\ \hline
+% timestamp & Long & Thời điểm ghi nhận trạng thái sổ lệnh (thời gian Unix). \\ \hline
+% bids & List & Danh sách các lệnh chờ MUA tốt nhất. Mỗi phần tử gồm [Giá, Khối lượng]. \\ \hline
+% asks & List & Danh sách các lệnh chờ BÁN tốt nhất. Mỗi phần tử gồm [Giá, Khối lượng]. \\ \hline
+% \end{tabular}
+% \caption{Mô tả các trường dữ liệu Bybit Orderbook}
+% \end{table}
+
+\subsection{Dữ liệu các chỉ số khác \cite{binance_metrics}}
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.25}
+\centering
+\begin{tabular}{|l|l|p{8cm}|}
+\hline
+\textbf{Tên trường} & \textbf{Kiểu dữ liệu} & \textbf{Mô tả chi tiết} \\ \hline
+create\_time & DateTime & Thời gian ghi nhận dữ liệu (ví dụ: 2026-01-26 00:00:00). \\ \hline
+symbol & String & Mã hợp đồng phái sinh (ví dụ: ETHUSD\_PERP). \\ \hline
+sum\_open\_interest & Float & Tổng hợp đồng mở tính theo đơn vị coin (ETH) chưa được tất toán. \\ \hline
+sum\_open\_interest\_value & Float & Tổng giá trị của hợp đồng mở quy đổi ra USDT. \\ \hline
+count\_toptrader\_long\_short\_ratio & Float & Tỷ lệ số lượng tài khoản top trader nắm giữ vị thế Long so với Short. \\ \hline
+sum\_toptrader\_long\_short\_ratio & Float & Tỷ lệ tổng khối lượng vị thế Long/Short của nhóm top trader. \\ \hline
+count\_long\_short\_ratio & Float & Tỷ lệ số lượng tài khoản toàn thị trường nắm giữ vị thế Long/Short. \\ \hline
+sum\_taker\_long\_short\_vol\_ratio & Float & Tỷ lệ khối lượng giao dịch Taker phe mua (Long) so với phe bán (Short). \\ \hline
+\end{tabular}
+\caption{Mô tả các trường dữ liệu chỉ số khác của phái sinh Binance}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{img/oi.png}
+\caption{Biểu đồ giá, hợp đồng mở, khối lượng giao dịch}
+\end{figure}
+
+\section{Các câu hỏi phân tích dự kiến}
+
+\begin{itemize}
+    \item \textbf{Câu hỏi 1:} Trong giai đoạn trên, xu hướng giá ETH biến động như thế nào so với các đường trung bình trượt giá đóng 7 cây nến?
+    
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth,height=0.8\textheight]{img/candle.png}
+    \caption{Biểu đồ cây nến, trung bình trượt giá ETH}
+    \end{figure}
+    
+    \item \textbf{Câu hỏi 2:} Mức độ tương quan giữa biến động giá ETH và các đồng "Meme coins" diễn ra như thế nào trong các giai đoạn thị trường hưng phấn hoặc hoảng loạn?
+    
+    \item \textbf{Câu hỏi 3:} Tại các thời điểm xuất hiện "nến đỏ dài" (giá giảm mạnh trong thời gian ngắn), hợp đồng mở và khối lượng thanh lý thay đổi như thế nào? Có phải áp lực thanh lý lệnh "Long" là nguyên nhân chính dẫn đến đà giảm sâu?
+    
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/liq-new.png}
+    \caption{Biểu đồ lượng thanh lý của các coin, hình chữ nhật càng lớn khi lượng thanh lý càng cao theo thời gian}
+    \end{figure}
+
+
+    \item \textbf{Câu hỏi 4:} Khối lượng thanh lý theo thời gian như thế nào trong một "ngày sập giá"? Xây dựng biểu đồ Heatmap để theo dõi vùng giá tập trung thanh lý cao nhất?
+    
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/liq-heat.png}
+    \caption{Biểu đồ Heatmap khối lượng thanh lý trong ngày sập giá của ETH}
+    \end{figure}
+\end{itemize}

@@ -1,13 +1,13 @@
 \section{Tên đề tài}
-\textbf{Phân tích động lực thị trường và giá/thanh lý của ETH, meme coin (DOGE) trong giai đoạn quý 1 2024 (tháng 1/2024 - 3/2024)}
+\textbf{Phân tích động lực thị trường và giá/thanh lý của ETH, meme coin (DOGE) và alt-coin khác (SOL,...) trong giai đoạn quý 1 2024 (tháng 1/2024 - 3/2024)}
 
 \section{Danh sách thành viên}
 Được ghi ở trang bìa.
 
 \section{Mô tả dữ liệu}
-Dữ liệu được thu thập từ sàn giao dịch lớn là và Binance \cite{binancevision_futures_data}, tập trung vào đồng Ethereum (ETH) trong các tháng 1 - 3/2024. Dữ liệu bao gồm ba nhóm chính, được mô tả chi tiết dưới đây.
+Dữ liệu được thu thập từ sàn giao dịch lớn là và Binance \cite{binancevision_futures_data}, ví dụ coin  Ethereum (ETH) trong các tháng 1 - 3/2024. Dữ liệu bao gồm ba nhóm chính, được mô tả chi tiết dưới đây.
 
-Dữ liệu được lấy từ các sàn giao dịch phái sinh (Futures) của Binance, thị trường hợp đồng vĩnh cửu ETHUSDT, các meme coin khác. 
+Dữ liệu được lấy từ các sàn giao dịch phái si của Binance, thị trường hợp đồng tương lai (vĩnh cửu) của các coin được đề cập ở trên.
 
 
 \subsection{Dữ liệu nến giá \cite{binance_klines}}
@@ -31,7 +31,7 @@ count & Integer & Số lượng lượt khớp lệnh trong nến. \\ \hline
 taker\_buy\_volume & Float & Khối lượng mua chủ động của Taker (Contract). \\ \hline
 taker\_buy\_base\_asset\_volume & Float & Giá trị mua chủ động của Taker tính theo ETH. \\ \hline
 \end{tabular}
-\caption{Mô tả các trường dữ liệu Binance Kline (Coin-Margined)}
+\caption{Mô tả các trường dữ liệu Binance Kline}
 \end{table}
 
 \subsection{Dữ liệu lệnh thanh lý \cite{binance_liquidation}}
@@ -68,10 +68,6 @@ accumulated\_fill\_quantity & Float & Tổng khối lượng đã khớp của l
 create\_time & DateTime & Thời gian ghi nhận dữ liệu (ví dụ: 2026-01-26 00:00:00). \\ \hline
 symbol & String & Mã hợp đồng phái sinh (ví dụ: ETHUSD\_PERP). \\ \hline
 sum\_open\_interest & Float & Tổng hợp đồng mở tính theo số lượng hợp đồng. \\ \hline
-sum\_open\_interest\_value & Float & Tổng giá trị của hợp đồng mở quy đổi ra USD. \\ \hline
-count\_toptrader\_long\_short\_ratio & Float & Tỷ lệ số lượng tài khoản top trader nắm giữ vị thế Long so với Short. \\ \hline
-sum\_toptrader\_long\_short\_ratio & Float & Tỷ lệ tổng khối lượng vị thế Long/Short của nhóm top trader. \\ \hline
-count\_long\_short\_ratio & Float & Tỷ lệ số lượng tài khoản toàn thị trường nắm giữ vị thế Long/Short. \\ \hline
 sum\_taker\_long\_short\_vol\_ratio & Float & Tỷ lệ khối lượng giao dịch Taker phe mua (Long) so với phe bán (Short). \\ \hline
 \end{tabular}
 \caption{Mô tả các trường dữ liệu chỉ số khác của phái sinh Binance}
